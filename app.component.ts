@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { ListService } from "app/service/list.service";
 import { DropDownService } from "app/service/drop-down.service";
+import {MessageService} from './message.service';
 // defining component detail like selector ,templateUrl and styleUrls
 @Component({
   selector: 'app-component',
   templateUrl: 'app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ListService]
+  providers: [ListService,MessageService]
 })
 export class RootComponent {
   title: string;
@@ -16,7 +17,7 @@ export class RootComponent {
   arrayList: any[] = [];
   genderArray: any[] = [];
 // defining constructor with _listservice and _dropdownservice as a private property
-  constructor(private _listService: ListService, private _dropDownService: DropDownService) { }
+  constructor(private _listService: ListService, private _dropDownService: DropDownService,private _messageservice:MessageService) { }
 
   ngOnInit() {
     this.userDetail = {
@@ -27,6 +28,7 @@ export class RootComponent {
       date: ''
     }
     this.genderArray = this._dropDownService.getDropDown();
+    _messageservice.getMessage();
   }
 
 
@@ -42,6 +44,7 @@ export class RootComponent {
     }
     this._listService.addList(model);
     this.arrayList = this._listService.getList();
+    _messageservice.addmessage();
   }
 }
 
