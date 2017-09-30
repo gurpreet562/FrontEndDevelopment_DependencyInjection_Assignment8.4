@@ -1,0 +1,59 @@
+<div class="form-group">
+  <div class="col-sm-10">
+    <form #f="ngForm" (ngSubmit)="submit(f.value)">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control" [(ngModel)]="userDetail.name" placeholder='FirstName' #refName>
+      </div>
+      <div class="form-group">
+        <input type="text" name="lastName" class="form-control" [(ngModel)]="userDetail.lastName" placeholder='LastName' #refLastName>
+      </div>
+      <div class="form-group">
+        <input type="text" name="age" class="form-control" [(ngModel)]="userDetail.age" placeholder='Age' #refagev>
+      </div>
+      <div class="form-group">
+        <input type="date" name="date" class="form-control" [(ngModel)]="userDetail.date" #refage>
+      </div>
+      <div class="form-group">
+        <input type="search" name="search" class="form-control" [(ngModel)]="userDetail.search" #refsearch>
+        {{search | searchfilter}}
+      </div>
+      <div class="form-group">
+        <select class="txt-box" name="gender" [(ngModel)]="userDetail.genderType" class="form-control" #refGender>
+          <option [value]="userDetail.genderType" [disabled]="true">Select Option </option>
+            <option *ngFor="let gender of genderArray" [ngValue]="gender.value">
+            {{gender.value}}
+            </option>
+      </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <hr/>
+    <div *ngIf="arrayList.length > 0">
+     
+
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>LastName</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of arrayList">  // using ngFor directive for displaying item value 
+              <td>{{item.name | capitalize}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.age}}</td>
+              <td>{{item.gender | uppercase}}</td>
+              <td>{{item.date | date : 'shortDate'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
